@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_msg"
+        style="@style/user_rl_style">
+
+        <TextView
+            style="@style/user_rl_style_tv"
+            android:text="消息通知" />
+
+        <ImageView style="@style/user_rl_style_iv" />
+    </RelativeLayout>
+
+    <View style="@style/view_line_user"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_off"
+        style="@style/user_rl_style">
+
+        <TextView
+            style="@style/user_rl_style_tv"
+            android:text="离线" />
+
+        <ImageView style="@style/user_rl_style_iv" />
+    </RelativeLayout>
+
+    <View style="@style/view_line_user"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_play"
+        style="@style/user_rl_style">
+
+        <TextView
+            style="@style/user_rl_style_tv"
+            android:text="活动" />
+
+        <ImageView style="@style/user_rl_style_iv" />
+    </RelativeLayout>
+
+    <View style="@style/view_line_user"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_buy"
+        style="@style/user_rl_style">
+
+        <TextView
+            style="@style/user_rl_style_tv"
+            android:text="商城" />
+
+        <ImageView style="@style/user_rl_style_iv" />
+    </RelativeLayout>
+
+    <View
+       style="@style/view_line_user" />
+
+    <RelativeLayout
+        android:id="@+id/rl_b_news"
+        style="@style/user_rl_style">
+
+        <TextView
+            style="@style/user_rl_style_tv"
+            android:text="我要爆料" />
+
+        <ImageView style="@style/user_rl_style_iv" />
+    </RelativeLayout>
+
+    <View style="@style/view_line_user"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_feedBook"
+        style="@style/user_rl_style">
+
+        <TextView
+            style="@style/user_rl_style_tv"
+            android:text="反馈" />
+
+        <ImageView style="@style/user_rl_style_iv" />
+    </RelativeLayout>
+
+    <View style="@style/view_line_user"/>
+</LinearLayout>

@@ -1,0 +1,120 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="view_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/view_line</item>
+    </style>
+
+    <style name="view_line_user">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/view_line</item>
+        <item name="android:layout_marginStart">20dp</item>
+    </style>
+
+    <style name="TabTextSize">
+        <item name="android:textSize">@dimen/tab_text_size</item>
+    </style>
+
+    <style name="WidgetProgressBar" parent="android:Widget.ProgressBar">　　
+        <item name="android:indeterminateDrawable">@drawable/progress_large_white</item>
+        <item name="android:indeterminateDuration">600</item>
+        <item name="android:minWidth">32dip</item>
+        　　
+        <item name="android:maxWidth">32dip</item>
+        　　
+        <item name="android:minHeight">32dip</item>
+        　　
+        <item name="android:maxHeight">32dip</item>
+    </style>
+    
+    <style name="Text_item">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+    </style>
+
+    <style name="img_sty">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="ll_sty">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!--我的页面中img的样式-->
+    <style name="user_img_sty">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:contentDescription">@null</item>
+    </style>
+
+    <!--我的页面中tv的样式-->
+    <style name="user_tv_sty">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/user_rl_tv</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--我的界面中条目的样式-->
+    <style name="user_rl_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">15dp</item>
+    </style>
+
+    <!--我的界面中条目tv的样式-->
+    <style name="user_rl_style_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/user_rl_tv</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_marginStart">20dp</item>
+    </style>
+
+    <!--我的界面中条目iv的样式-->
+    <style name="user_rl_style_iv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@mipmap/right_1</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_marginEnd">5dp</item>
+    </style>
+
+    <style name="BaseText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:shadowDx">-1</item>
+        <item name="android:shadowDy">-1</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>

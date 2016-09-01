@@ -1,0 +1,31 @@
+<study.com.s_sxl.carelib.pullRefreshView.layout.PullRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pull_bg">
+
+    <study.com.s_sxl.fmeituan.view.NormalHeaderView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <study.com.s_sxl.fmeituan.view.NormalFooterView
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:cacheColorHint="@null"
+        android:listSelector="@color/transparent"
+        android:divider="#ccc"
+        android:dividerHeight="1dp"
+        />
+
+</study.com.s_sxl.carelib.pullRefreshView.layout.PullRefreshLayout>

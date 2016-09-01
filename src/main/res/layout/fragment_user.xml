@@ -1,0 +1,119 @@
+<study.com.s_sxl.fmeituan.view.LazyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d5d8dc"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+
+            <ImageView
+                android:id="@+id/iv_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:id="@+id/ll_iv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/img_sty"
+                    android:src="@mipmap/phone" />
+
+                <ImageView
+                    style="@style/img_sty"
+                    android:src="@mipmap/weixing" />
+
+                <ImageView
+                    style="@style/img_sty"
+                    android:src="@mipmap/qq" />
+
+                <ImageView
+                    style="@style/img_sty"
+                    android:src="@mipmap/weibo" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_iv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/tv_selector"
+                android:clickable="true"
+                android:drawablePadding="5dp"
+                android:drawableEnd="@mipmap/iv_right"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/text_login"
+                android:textColor="#f4f4ef"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_tv"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <LinearLayout
+                style="@style/ll_sty">
+
+                <ImageView
+                    style="@style/user_img_sty"
+                    android:src="@mipmap/collection" />
+
+                <TextView
+                    style="@style/user_tv_sty"
+                    android:text="收藏" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/ll_sty">
+
+                <ImageView
+                    style="@style/user_img_sty"
+                    android:src="@mipmap/night" />
+
+                <TextView
+                    style="@style/user_tv_sty"
+                    android:text="夜间"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+              style="@style/ll_sty">
+
+                <ImageView
+                    style="@style/user_img_sty"
+                    android:src="@mipmap/setting" />
+
+                <TextView
+                    style="@style/user_tv_sty"
+                    android:text="设置"
+                     />
+            </LinearLayout>
+        </LinearLayout>
+
+        <include layout="@layout/user_item" />
+
+    </LinearLayout>
+
+</study.com.s_sxl.fmeituan.view.LazyScrollView>

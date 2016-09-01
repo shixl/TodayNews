@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="main">#3ca5b6</color>
+    <color name="divider">#ddd</color>
+    <color name="tab_text">#C8C7C3</color>
+    <color name="view_line">#EFEFEF</color>
+    <color name="home_bg">#F4F4F4</color>
+    <color name="text_tab">#F5D1D1D1</color>
+    <color name="pull_bg">#E8E8E8</color>
+    <color name="pull_text_color">#B9B9B9</color>
+    <color name="red">#D53C3E</color>
+    <color name="tv_shape_bg">#80A5A5A4</color>
+    <color name="tv_pre_bg">#80535151</color>
+    <color name="user_rl_tv">#787878</color>
+</resources>

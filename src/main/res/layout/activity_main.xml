@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+   <FrameLayout
+       android:id="@+id/real_tab_content"
+       android:layout_width="match_parent"
+       android:layout_weight="1"
+       android:layout_height="0dp"/>
+
+   <View style="@style/view_line"/>
+
+   <study.com.s_sxl.carelib.viewUtils.tab.InterceptedFragmentTabHost
+       android:id="@android:id/tabhost"
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/tab_height"
+       android:background="@color/white"
+       />
+
+</LinearLayout>
