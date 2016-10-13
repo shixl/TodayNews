@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import study.com.s_sxl.fmeituan.bean.NewsBean;
+import study.com.s_sxl.fmeituan.bean.VideoBean;
 import study.com.s_sxl.fmeituan.fragment.homeFragments.HeadLineFragment;
 import study.com.s_sxl.fmeituan.fragment.homeFragments.HotspotFragment;
 import study.com.s_sxl.fmeituan.fragment.homeFragments.LocalFragment;
@@ -76,7 +77,26 @@ public class DataSimulation {
         return list;
     }
 
+    /**
+     *  获取播放视频的个数
+     * @param number
+     * @return
+     */
+    public List<VideoBean> getVideos(int number){
+        List<VideoBean> list = new ArrayList<>(number);
 
+        for(int i = 0; i < number;i++){
+            VideoBean bean = new VideoBean();
+            bean.headImgUrl = "";
+            bean.videoUrl = "";
+            bean.videoTitle = "这是一段测试视频，并没有啥意义";
+            bean.videoTime = "5:00";
+            bean.playTimes = "999";
+            bean.comment = "999";
+            list.add(bean);
+        }
+        return list;
+    }
 
   /*  public List<T> getRecords(Class<T> clz, int number) {
 

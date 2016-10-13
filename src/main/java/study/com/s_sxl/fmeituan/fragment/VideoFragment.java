@@ -1,17 +1,27 @@
 package study.com.s_sxl.fmeituan.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import java.util.List;
 
 import butterknife.Bind;
 import study.com.s_sxl.carelib.fragment.BaseFragment;
 import study.com.s_sxl.carelib.viewUtils.NavBar;
 import study.com.s_sxl.fmeituan.R;
+import study.com.s_sxl.fmeituan.bean.VideoBean;
+import study.com.s_sxl.fmeituan.constant.DataSimulation;
 
 public class VideoFragment extends BaseFragment {
 
     @Bind(R.id.nvBar)
     NavBar mBavBar;
+    @Bind(R.id.recycler)
+    RecyclerView mRecycler;
+
+    private List<VideoBean> mVideos;
 
     /**
      * 初始化方法, 类似OnCreate, 仅在此方法中做初始化操作, findView与事件绑定请使用ButterKnife
@@ -21,7 +31,6 @@ public class VideoFragment extends BaseFragment {
     @Override
     protected void init(Bundle savedInstanceState) {
         initNav();
-
     }
 
     /**
@@ -44,6 +53,13 @@ public class VideoFragment extends BaseFragment {
                 showToastMessage("视频搜索");
             }
         });
+        mVideos = DataSimulation.getInstance().getVideos(20);
+        initView();
+    }
+
+    private void initView() {
+        mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
     }
+
 }

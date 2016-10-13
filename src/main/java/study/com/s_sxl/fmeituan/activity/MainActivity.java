@@ -52,9 +52,6 @@ public class MainActivity extends BaseActivity implements TabNavigator.TabNaviga
             public void onTabChanged(String tabId) {
                 if (tabId.equals(mTabs[3])) {
                     isFullScreen = true;
-//                    if(isFullScreen){
-//                        resetFragmentView();
-//                    }
                     resetFragmentImageView();
                     StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, 0, null);
                 } else if (tabId.equals(mTabs[1]) || tabId.equals(mTabs[2])) {

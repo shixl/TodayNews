@@ -42,4 +42,5 @@ public class PlayVideoActivity extends BaseActivity {
         mSurfaceView.requestFocus();
     }
 
+
 }

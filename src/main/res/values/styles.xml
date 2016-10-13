@@ -117,4 +117,11 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <!--视频列表中tv的样式-->
+    <style name="video_tv_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
 </resources>
