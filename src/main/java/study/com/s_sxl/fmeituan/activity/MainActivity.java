@@ -20,7 +20,7 @@ import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.fragment.FollowFragment;
 import study.com.s_sxl.fmeituan.fragment.HomeFragment;
 import study.com.s_sxl.fmeituan.fragment.UserFragment;
-import study.com.s_sxl.fmeituan.fragment.VideoFragment;
+import study.com.s_sxl.fmeituan.fragment.VideoHomeFragment;
 
 public class MainActivity extends BaseActivity implements TabNavigator.TabNavigatorContent {
 
@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity implements TabNavigator.TabNaviga
      */
     @Override
     public Class[] getFragmentClasses() {
-        return new Class[]{HomeFragment.class, VideoFragment.class, FollowFragment.class,
+        return new Class[]{HomeFragment.class, VideoHomeFragment.class, FollowFragment.class,
                 UserFragment.class};
     }
 

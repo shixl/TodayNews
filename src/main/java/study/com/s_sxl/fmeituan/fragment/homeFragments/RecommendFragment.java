@@ -74,7 +74,7 @@ public class RecommendFragment extends BaseFragment implements BaseHeaderView.On
             public void run() {
                 page++;
                 List<NewsBean> news = DataSimulation.getInstance().getNews(5);
-                mRecommendAdapter.addAll(mNews);
+                mRecommendAdapter.addAll(news);
                 mFooter.stopLoad();
             }
         }, 3000);

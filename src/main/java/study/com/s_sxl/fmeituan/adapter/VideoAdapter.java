@@ -5,10 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import java.util.List;
 
-import io.vov.vitamio.widget.VideoView;
+import study.com.s_sxl.carelib.viewUtils.roundedimageview.RoundedTransformationBuilder;
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.bean.VideoBean;
 
@@ -30,9 +35,23 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
 
     @Override
     public void onBindViewHolder(VideoViewHolder holder, int position) {
-        VideoBean videoBean = mList.get(holder.getLayoutPosition());
-        holder.mVideoView.setVideoPath(videoBean.videoUrl);
+        VideoBean videoBean = mList.get(position);
 
+        //holder.videoTitle.setText(videoBean.videoTitle);
+        Picasso.with(mContext).load(videoBean.videoPcUrl).into(holder.videoPc);
+        holder.videoControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        holder.videoTimes.setText(videoBean.videoTime);
+        RequestCreator creator = Picasso.with(mContext).load(videoBean.headImgUrl).resize(45, 45)
+                .centerCrop().transform(new RoundedTransformationBuilder().oval(true).build());
+        creator.into(holder.userHead);
+        holder.userName.setText(videoBean.userName);
+        holder.playTimes.setText(videoBean.playTimes);
+        holder.comments.setText(videoBean.comment);
     }
 
     @Override
@@ -42,12 +61,27 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
 
     class VideoViewHolder extends RecyclerView.ViewHolder {
 
-        VideoView mVideoView;
+       // TextView videoTitle;
+        ImageView videoControl;
+        TextView videoTimes;
+        ImageView userHead;
+        TextView userName;
+        TextView playTimes;
+        TextView comments;
+        ImageView videoPc;
 
         public VideoViewHolder(View itemView) {
             super(itemView);
 
-            mVideoView = (VideoView) itemView.findViewById(R.id.surface_view);
+            videoPc =  (ImageView) itemView.findViewById(R.id.surface_view);
+            //videoTitle = (TextView) itemView.findViewById(R.id.video_title);
+            videoControl = (ImageView) itemView.findViewById(R.id.iv_control);
+            videoTimes =  (TextView) itemView.findViewById(R.id.video_times);
+            userHead = (ImageView) itemView.findViewById(R.id.video_head);
+            userName = (TextView) itemView.findViewById(R.id.tv_userName);
+            playTimes = (TextView) itemView.findViewById(R.id.tv_playTimes);
+            comments = (TextView) itemView.findViewById(R.id.tv_comment);
+
         }
     }
 }

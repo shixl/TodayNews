@@ -11,16 +11,16 @@ import butterknife.Bind;
 import study.com.s_sxl.carelib.fragment.BaseFragment;
 import study.com.s_sxl.carelib.viewUtils.NavBar;
 import study.com.s_sxl.fmeituan.R;
+import study.com.s_sxl.fmeituan.adapter.VideoAdapter;
 import study.com.s_sxl.fmeituan.bean.VideoBean;
 import study.com.s_sxl.fmeituan.constant.DataSimulation;
 
-public class VideoFragment extends BaseFragment {
+public class VideoHomeFragment extends BaseFragment {
 
     @Bind(R.id.nvBar)
     NavBar mBavBar;
     @Bind(R.id.recycler)
     RecyclerView mRecycler;
-
     private List<VideoBean> mVideos;
 
     /**
@@ -53,13 +53,14 @@ public class VideoFragment extends BaseFragment {
                 showToastMessage("视频搜索");
             }
         });
-        mVideos = DataSimulation.getInstance().getVideos(20);
+        mVideos = DataSimulation.getInstance().getVideos(10);
         initView();
     }
 
     private void initView() {
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        VideoAdapter mAdapter = new VideoAdapter(getContext(),mVideos);
+        mRecycler.setAdapter(mAdapter);
     }
 
 }

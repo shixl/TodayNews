@@ -15,8 +15,8 @@ public class VideoBean implements Serializable {
     public String headImgUrl;
     //用户昵称
     public String userName;
-    //视频链接
-    public String videoUrl;
+    //视频封面链接
+    public String videoPcUrl;
     //视频标题
     public String videoTitle;
     //视频时长
