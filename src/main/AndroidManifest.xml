@@ -31,7 +31,10 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
-        <activity android:name=".activity.PlayVideoActivity"/>
+        <activity android:name=".activity.PlayVideoActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="sensorLandscape"
+            />
     </application>
 
 </manifest>

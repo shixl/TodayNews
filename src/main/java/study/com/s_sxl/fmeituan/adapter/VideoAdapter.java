@@ -34,15 +34,16 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
     }
 
     @Override
-    public void onBindViewHolder(VideoViewHolder holder, int position) {
+    public void onBindViewHolder(VideoViewHolder holder, final int position) {
         VideoBean videoBean = mList.get(position);
 
-        //holder.videoTitle.setText(videoBean.videoTitle);
         Picasso.with(mContext).load(videoBean.videoPcUrl).into(holder.videoPc);
         holder.videoControl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(mOnClickListener != null){
+                    mOnClickListener.OnClick(position);
+                }
             }
         });
         holder.videoTimes.setText(videoBean.videoTime);
@@ -61,7 +62,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
 
     class VideoViewHolder extends RecyclerView.ViewHolder {
 
-       // TextView videoTitle;
         ImageView videoControl;
         TextView videoTimes;
         ImageView userHead;
@@ -74,7 +74,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
             super(itemView);
 
             videoPc =  (ImageView) itemView.findViewById(R.id.surface_view);
-            //videoTitle = (TextView) itemView.findViewById(R.id.video_title);
             videoControl = (ImageView) itemView.findViewById(R.id.iv_control);
             videoTimes =  (TextView) itemView.findViewById(R.id.video_times);
             userHead = (ImageView) itemView.findViewById(R.id.video_head);
@@ -83,5 +82,15 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
             comments = (TextView) itemView.findViewById(R.id.tv_comment);
 
         }
+    }
+
+    private OnClickItemListener mOnClickListener;
+
+    public interface OnClickItemListener {
+        void OnClick(int position);
+    }
+
+    public void setOnClicItemkListener(OnClickItemListener onClickItemListener){
+        this.mOnClickListener = onClickItemListener;
     }
 }

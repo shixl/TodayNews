@@ -89,7 +89,6 @@ public class DataSimulation {
             VideoBean bean = new VideoBean();
             bean.headImgUrl = "http://img4.imgtn.bdimg.com/it/u=2894838897,3395831603&fm=21&gp=0.jpg";
             bean.videoPcUrl = "http://img2.imgtn.bdimg.com/it/u=475333573,2921291647&fm=21&gp=0.jpg";
-            bean.videoTitle = "这是一段测试视频，并没有啥意义";
             bean.videoTime = "5:00";
             bean.playTimes = "999万次评论";
             bean.comment = "999";

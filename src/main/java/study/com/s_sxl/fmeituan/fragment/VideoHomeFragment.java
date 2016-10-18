@@ -1,5 +1,6 @@
 package study.com.s_sxl.fmeituan.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +12,12 @@ import butterknife.Bind;
 import study.com.s_sxl.carelib.fragment.BaseFragment;
 import study.com.s_sxl.carelib.viewUtils.NavBar;
 import study.com.s_sxl.fmeituan.R;
+import study.com.s_sxl.fmeituan.activity.PlayVideoActivity;
 import study.com.s_sxl.fmeituan.adapter.VideoAdapter;
 import study.com.s_sxl.fmeituan.bean.VideoBean;
 import study.com.s_sxl.fmeituan.constant.DataSimulation;
 
-public class VideoHomeFragment extends BaseFragment {
+public class VideoHomeFragment extends BaseFragment implements VideoAdapter.OnClickItemListener {
 
     @Bind(R.id.nvBar)
     NavBar mBavBar;
@@ -61,6 +63,12 @@ public class VideoHomeFragment extends BaseFragment {
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         VideoAdapter mAdapter = new VideoAdapter(getContext(),mVideos);
         mRecycler.setAdapter(mAdapter);
+        mAdapter.setOnClicItemkListener(this);
     }
 
+    @Override
+    public void OnClick(int position) {
+        Intent intent = new Intent(getActivity(), PlayVideoActivity.class);
+        startActivity(intent);
+    }
 }
