@@ -1,35 +1,34 @@
 package study.com.s_sxl.fmeituan.activity;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
-import com.jaeger.library.StatusBarUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import butterknife.Bind;
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.VideoView;
-import study.com.s_sxl.carelib.activity.BaseActivity;
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.view.CustomMediaController;
 
-public class PlayVideoActivity extends BaseActivity implements Runnable{
+public class PlayVideoActivity extends Activity implements Runnable{
 
-   private final static String Path = Environment.getExternalStorageDirectory() + "/Test/a.mp4";
-    @Bind(R.id.surface_view)
-    VideoView mVideoView;
+    private final static String Path = Environment.getExternalStorageDirectory() + "/Test/你大爷额的测试视屏.mp4";
+
+    private VideoView mVideoView;
     private CustomMediaController mController;
 
     private static final int TIME = 0;
@@ -50,7 +49,8 @@ public class PlayVideoActivity extends BaseActivity implements Runnable{
     };
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         //定义全屏参数
         int flag = WindowManager.LayoutParams.FLAG_FULLSCREEN;
@@ -58,20 +58,19 @@ public class PlayVideoActivity extends BaseActivity implements Runnable{
         Window window = PlayVideoActivity.this.getWindow();
         //设置当前窗体为全屏显示
         window.setFlags(flag, flag);
+        toggleHideBar();
         //设置视频解码监听
-       if (!LibsChecker.checkVitamioLibs(this)) {
+        if (!LibsChecker.checkVitamioLibs(this)) {
             return;
-       }
+        }
 
+        setContentView(R.layout.activity_play_video);
         initVideo();
     }
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_play_video;
-    }
 
     private void initVideo() {
+        mVideoView = (VideoView) findViewById(R.id.surface_view);
         mVideoView.setVideoPath(Path);//设置播放的路径
         mController = new CustomMediaController(this,mVideoView,this);//实例化控制器
         mController.show(5000);
@@ -134,9 +133,31 @@ public class PlayVideoActivity extends BaseActivity implements Runnable{
         }
     }
 
-    @Override
-    protected void setStatusBar() {
-        int color = getResources().getColor(R.color.transparent);
-        StatusBarUtil.setColor(this, color, 0);
+    public void toggleHideBar() {
+
+        int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
+        int newUiOptions = uiOptions;
+
+        boolean isImmersiveModeEnabled =
+                ((uiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) == uiOptions);
+        if (isImmersiveModeEnabled) {
+
+        } else {
+
+        }
+
+        if (Build.VERSION.SDK_INT >= 14) {
+            newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        }
+
+        if (Build.VERSION.SDK_INT >= 16) {
+            newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        }
+
+        if (Build.VERSION.SDK_INT >= 18) {
+            newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        }
+
+        getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
     }
 }

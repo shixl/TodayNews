@@ -26,7 +26,6 @@ public class CustomMediaController extends MediaController {
     private GestureDetector mGestureDetector;
     private ImageButton mTopBack;
     private ImageView mBattery;
-    private TextView mTitleName;
     private TextView mTime;
     private TextView mBatteryName;
 
@@ -68,7 +67,6 @@ public class CustomMediaController extends MediaController {
                 }
             }
         });
-        mTitleName = (TextView) view.findViewById(R.id.mediacontroller_file_name);
         mTime = (TextView) view.findViewById(R.id.mediacontroller_time);
         mBatteryName = (TextView) view.findViewById(R.id.mediacontroller_Battery);
 
@@ -100,7 +98,7 @@ public class CustomMediaController extends MediaController {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            //当收拾结束，并且是单击结束时，控制器隐藏/显示
+            //当手势结束，并且是单击结束时，控制器隐藏/显示
             toggleMediaControlsVisiblity();
             return super.onSingleTapConfirmed(e);
         }
@@ -129,13 +127,7 @@ public class CustomMediaController extends MediaController {
             mTime.setText(time);
     }
 
-    //设置视频标题
-    public void setTitle(String fileName) {
-        if (mTitleName != null)
-            mTitleName.setText(fileName);
-    }
-
-    //显示电量，
+    //显示电量
     public void setBattery(String stringBattery){
         if(mTime != null && mBattery != null){
             mBatteryName.setText( stringBattery + "%");
@@ -167,5 +159,5 @@ public class CustomMediaController extends MediaController {
             } else {
                 mVideoView.start();
             }
-        }
+    }
 }

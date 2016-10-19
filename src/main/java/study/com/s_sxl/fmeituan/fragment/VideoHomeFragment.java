@@ -69,6 +69,6 @@ public class VideoHomeFragment extends BaseFragment implements VideoAdapter.OnCl
     @Override
     public void OnClick(int position) {
         Intent intent = new Intent(getActivity(), PlayVideoActivity.class);
-        startActivity(intent);
+        getActivity().startActivity(intent);
     }
 }
