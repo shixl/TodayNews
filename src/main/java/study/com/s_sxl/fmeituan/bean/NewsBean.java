@@ -11,5 +11,6 @@ public class NewsBean implements Serializable {
     public String author;
     public String commentNumber;
     public String newsTime;
+    public boolean isChange;
 
 }

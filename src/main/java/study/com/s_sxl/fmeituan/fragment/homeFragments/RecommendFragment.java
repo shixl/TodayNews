@@ -3,9 +3,11 @@ package study.com.s_sxl.fmeituan.fragment.homeFragments;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import study.com.s_sxl.carelib.adapter.MultiItemTypeSupport;
 import study.com.s_sxl.carelib.fragment.BaseFragment;
 import study.com.s_sxl.carelib.pullRefreshView.layout.BaseFooterView;
 import study.com.s_sxl.carelib.pullRefreshView.layout.BaseHeaderView;
@@ -27,7 +29,7 @@ public class RecommendFragment extends BaseFragment implements BaseHeaderView.On
 
     private RecommendAdapter mRecommendAdapter;
     public int page = 1;
-    private List<NewsBean> mNews;
+    private ArrayList<NewsBean> mNews;
 
     @Override
     protected void init(Bundle savedInstanceState) {
@@ -44,9 +46,33 @@ public class RecommendFragment extends BaseFragment implements BaseHeaderView.On
         mNews = DataSimulation.getInstance().getNews(10);
 
         if(mRecommendAdapter == null){
-            mRecommendAdapter = new RecommendAdapter(getContext());
+            MultiItemTypeSupport<NewsBean> multiItemTypeSupport = new MultiItemTypeSupport<NewsBean>() {
+                @Override
+                public int getLayoutId(int position, NewsBean newsBean) {
+                    if(newsBean.isChange){
+                        return R.layout.coustom_lv_item;
+                    }
+                    return R.layout.coustom_lv_item_two;
+                }
+
+                @Override
+                public int getViewTypeCount() {
+                    return 2;
+                }
+
+
+                @Override
+                public int getItemViewType(int position, NewsBean newsBean) {
+                    if(newsBean.isChange){
+                        return 1;
+                    }
+                    return 2;
+                }
+            };
+
+            mRecommendAdapter = new RecommendAdapter(getContext(),mNews,multiItemTypeSupport);
         }
-        mRecommendAdapter.addAll(mNews);
+        //mRecommendAdapter.addAll(mNews);
         mLv.setAdapter(mRecommendAdapter);
 
         mHeader.setOnRefreshListener(this);

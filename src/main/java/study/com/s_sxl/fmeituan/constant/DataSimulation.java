@@ -55,9 +55,9 @@ public class DataSimulation {
      * 首页中ListView的条目数据
      *
      */
-    public List<NewsBean> getNews(int number){
+    public ArrayList<NewsBean> getNews(int number){
 
-        List<NewsBean> list = new ArrayList<>(number);
+        ArrayList<NewsBean> list = new ArrayList<>(number);
 
         List<String> urls = new ArrayList<>();
         urls.add("http://img5.imgtn.bdimg.com/it/u=3584830634,1222557427&fm=21&gp=0.jpg");
@@ -66,11 +66,16 @@ public class DataSimulation {
 
         for(int i =0; i < number; i++){
             NewsBean bean = new NewsBean();
-            bean.newsTitle = "聪明外露者德薄，词华太盛者福浅。" + i;
+            bean.newsTitle = "聪明外露者德薄，词华太盛者福浅。聪明外露者德薄，词华太盛者福浅。" + i;
             bean.author = "傲娇小胖子";
             bean.commentNumber = "999评论";
             bean.newsTime = "25小时前";
             bean.newsImgList = urls;
+            if(i%2==0){
+                bean.isChange = true;
+            }else {
+                bean.isChange = false;
+            }
             list.add(bean);
         }
 
