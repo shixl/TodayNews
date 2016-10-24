@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="130dp"
     android:background="@color/white">
 
     <LinearLayout
@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/item_tv"
-            android:layout_width="237dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:gravity="center"
@@ -24,7 +24,7 @@
             android:textSize="@dimen/item_text_size" />
 
         <LinearLayout
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -59,8 +59,8 @@
     <ImageView
         android:id="@+id/iv_news"
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
-        android:scaleType="fitXY"
+        android:layout_height="115dp"
+        android:scaleType="center"
         android:layout_alignParentEnd="true"
         android:src="@mipmap/ic_launcher"
         android:layout_margin="8dp"

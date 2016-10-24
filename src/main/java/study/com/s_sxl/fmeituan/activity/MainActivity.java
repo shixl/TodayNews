@@ -1,38 +1,35 @@
 package study.com.s_sxl.fmeituan.activity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTabHost;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
 
 import butterknife.Bind;
 import study.com.s_sxl.carelib.activity.BaseActivity;
-import study.com.s_sxl.carelib.viewUtils.tab.InterceptedFragmentTabHost;
-import study.com.s_sxl.carelib.viewUtils.tab.TabNavigator;
 import study.com.s_sxl.fmeituan.R;
-import study.com.s_sxl.fmeituan.fragment.FollowFragment;
-import study.com.s_sxl.fmeituan.fragment.HomeFragment;
-import study.com.s_sxl.fmeituan.fragment.UserFragment;
-import study.com.s_sxl.fmeituan.fragment.VideoHomeFragment;
+import study.com.s_sxl.fmeituan.constant.TabConstant;
 
-public class MainActivity extends BaseActivity implements TabNavigator.TabNavigatorContent {
+public class MainActivity extends BaseActivity implements TabHost.OnTabChangeListener {
 
     @Bind(android.R.id.tabhost)
-    InterceptedFragmentTabHost mTab;
+    FragmentTabHost mTab;
     @Bind(R.id.real_tab_content)
     FrameLayout realTabContent;
 
-    private TabNavigator mNavigator = new TabNavigator();
-    private int[] mBgRecourse = {R.drawable.tab_1_bg, R.drawable.tab_2_bg, R.drawable.tab_3_bg, R.drawable.tab_4_bg};
-    private String[] mTabs;
     private boolean isFullScreen = false;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -40,91 +37,72 @@ public class MainActivity extends BaseActivity implements TabNavigator.TabNaviga
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        mTabs = new String[]{getString(R.string.tab_home), getString(R.string.tab_business),
-                getString(R.string.tab_mine), getString(R.string.tab_more)};
-        mNavigator.setup(this, mTab, this, getSupportFragmentManager(), R.id.real_tab_content);
-        //把tab间的分隔线置为null
+        mTab.setup(this,super.getSupportFragmentManager()
+                ,R.id.real_tab_content);
         mTab.getTabWidget().setDividerDrawable(null);
+        initTab();
+        mTab.setOnTabChangedListener(this);
 
-        //处理不同Fragment的状态栏颜色
-        mTab.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String tabId) {
-                if (tabId.equals(mTabs[3])) {
-                    isFullScreen = true;
-                    resetFragmentImageView();
-                    StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, 0, null);
-                } else if (tabId.equals(mTabs[1]) || tabId.equals(mTabs[2])) {
-                    if(isFullScreen){
-                        resetFragmentView();
-                    }
-                    StatusBarUtil.setColor(MainActivity.this, getResources().getColor(R.color.white), 0);
-                } else if (tabId.equals(mTabs[0])) {
-                    if(isFullScreen){
-                        resetFragmentView();
-                    }
-                    setStatusBar();
-                }
-            }
-        });
     }
 
-    /**
-     * 根据position获取每个tab标签视图
-     *
-     * @param position tab标签位置
-     * @return tab标签视图
-     */
-    @Override
-    public View getTabView(int position) {
-        View view = getLayoutInflater().inflate(R.layout.view_tab_content, null);
+    private void initTab() {
+        String tabs[]= TabConstant.getTabsTxt();
+        for(int i=0;i<tabs.length;i++){
+            TabHost.TabSpec tabSpec =mTab.newTabSpec(tabs[i]).setIndicator(getTabView(i));
+            mTab.addTab(tabSpec,TabConstant.getFragments()[i],null);
+            mTab.setTag(i);
+        }
+    }
 
-        ImageView ivTab = (ImageView) view.findViewById(R.id.iv_tab_icon);
-        TextView tvTab = (TextView) view.findViewById(R.id.tv_tab_text);
-
-        ivTab.setImageResource(mBgRecourse[position]);
-        tvTab.setText(mTabs[position]);
-
+    private View getTabView(int idx){
+        View view= LayoutInflater.from(this).inflate(R.layout.view_tab_content,null);
+        ((TextView)view.findViewById(R.id.tv_tab_text)).setText(TabConstant.getTabsTxt()[idx]);
+        if(idx==0){
+            ((TextView)view.findViewById(R.id.tv_tab_text)).setTextColor(Color.RED);
+            ((ImageView)view.findViewById(R.id.iv_tab_icon)).setImageResource(TabConstant.getTabsImgLight()[idx]);
+        }else{
+            ((ImageView)view.findViewById(R.id.iv_tab_icon)).setImageResource(TabConstant.getTabsImg()[idx]);
+        }
         return view;
     }
 
-    /**
-     * 根据position获取切换至目标Fragment要传递的数据Bundle
-     *
-     * @param position 目标Fragment位置
-     * @return 数据Bundle
-     */
     @Override
-    public Bundle getArgs(int position) {
-        return null;
+    public void onTabChanged(String tabId) {
+        updateTab();
+        updateColor(tabId);
     }
 
-    /**
-     * 获取Fragment的类对象数组
-     *
-     * @return Fragment的类对象数组
-     */
-    @Override
-    public Class[] getFragmentClasses() {
-        return new Class[]{HomeFragment.class, VideoHomeFragment.class, FollowFragment.class,
-                UserFragment.class};
+    private void updateTab(){
+        TabWidget tabw=mTab.getTabWidget();
+        for(int i=0;i<tabw.getChildCount();i++){
+            View view=tabw.getChildAt(i);
+            ImageView iv=(ImageView)view.findViewById(R.id.iv_tab_icon);
+            if(i==mTab.getCurrentTab()){
+                ((TextView)view.findViewById(R.id.tv_tab_text)).setTextColor(Color.RED);
+                iv.setImageResource(TabConstant.getTabsImgLight()[i]);
+            }else{
+                ((TextView)view.findViewById(R.id.tv_tab_text)).setTextColor(getResources().getColor(R.color.text_main));
+                iv.setImageResource(TabConstant.getTabsImg()[i]);
+            }
+        }
     }
 
-    /**
-     * 获取每个Fragment的tag
-     *
-     * @return Fragment的tag数组
-     */
-    @Override
-    public String[] getTabTags() {
-        return mTabs;
-    }
-
-    @Override
-    protected void setStatusBar() {
-        //isFullScreen = true;
-        int color = getResources().getColor(R.color.red);
-        StatusBarUtil.setColor(this, color, 0);
+    public void updateColor(String tabId){
+        if(tabId.equals(TabConstant.getTabsTxt()[1])||tabId.equals(TabConstant.getTabsTxt()[2])){
+            if(isFullScreen){
+                resetFragmentView();
+            }
+            StatusBarUtil.setColor(this,getResources().getColor(R.color.white),0);
+        }else if(tabId.equals(TabConstant.getTabsTxt()[3])){
+            isFullScreen = true;
+            resetFragmentImageView();
+            StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, 0, null);
+        }else if(tabId.equals(TabConstant.getTabsTxt()[0])){
+            if(isFullScreen){
+                resetFragmentView();
+            }
+            setStatusBar();
+        }
     }
 
     public void resetFragmentView() {
@@ -143,6 +121,13 @@ public class MainActivity extends BaseActivity implements TabNavigator.TabNaviga
         }
     }
 
+    @Override
+    protected void setStatusBar() {
+        //isFullScreen = true;
+        int color = getResources().getColor(R.color.red);
+        StatusBarUtil.setColor(this, color, 0);
+    }
+
     public void resetFragmentImageView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             View contentView = findViewById(android.R.id.content);
@@ -158,6 +143,7 @@ public class MainActivity extends BaseActivity implements TabNavigator.TabNaviga
             }
         }
     }
+
     private static int getStatusBarHeight(Context context) {
         // 获得状态栏高度
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");

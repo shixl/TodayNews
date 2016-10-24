@@ -72,7 +72,6 @@ public class RecommendFragment extends BaseFragment implements BaseHeaderView.On
 
             mRecommendAdapter = new RecommendAdapter(getContext(),mNews,multiItemTypeSupport);
         }
-        //mRecommendAdapter.addAll(mNews);
         mLv.setAdapter(mRecommendAdapter);
 
         mHeader.setOnRefreshListener(this);

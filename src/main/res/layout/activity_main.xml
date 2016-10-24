@@ -3,21 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     >
 
    <FrameLayout
        android:id="@+id/real_tab_content"
        android:layout_width="match_parent"
-       android:layout_weight="1"
-       android:layout_height="0dp"/>
+       android:layout_height="0dp"
+       android:layout_weight="1">
+
+   </FrameLayout>
 
    <View style="@style/view_line"/>
 
-   <study.com.s_sxl.carelib.viewUtils.tab.InterceptedFragmentTabHost
+   <android.support.v4.app.FragmentTabHost
        android:id="@android:id/tabhost"
        android:layout_width="match_parent"
-       android:layout_height="@dimen/tab_height"
+       android:layout_height="wrap_content"
        android:background="@color/white"
-       />
+       >
+      <FrameLayout
+          android:id="@android:id/tabcontent"
+          android:layout_height="0dp"
+          android:layout_width="0dp" />
 
+   </android.support.v4.app.FragmentTabHost>
 </LinearLayout>
