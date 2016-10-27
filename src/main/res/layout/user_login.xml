@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    >
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@mipmap/close"
+        android:layout_margin="10dp"
+        />
+
+    <TextView
+        android:layout_marginTop="70dp"
+        android:text="@string/login_msg_1"
+        style="@style/login_tv"
+        />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:text="@string/login_msg_2"
+        style="@style/login_tv"
+        />
+
+    <RelativeLayout
+        android:layout_marginTop="60dp"
+        style="@style/login_rl">
+
+        <EditText
+            android:id="@+id/et_name"
+            android:hint="@string/login_phone"
+            style="@style/login_et"
+            android:inputType="phone"
+            android:maxLength="11" />
+        <View
+            android:layout_alignStart="@+id/tv_register"
+            android:layout_centerVertical="true"
+            style="@style/view_line_su"/>
+
+        <TextView
+            android:padding="13dp"
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_register"
+            android:layout_centerVertical="true"
+            android:layout_alignEnd="@+id/et_name"
+            android:textColor="@color/text_main"
+            android:layout_marginEnd="20dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        style="@style/login_rl">
+        <EditText
+            android:id="@+id/et_psd"
+            android:hint="@string/login_register"
+            style="@style/login_et"
+            android:inputType="textPassword"
+            android:maxLength="20" />
+    </RelativeLayout>
+</LinearLayout>

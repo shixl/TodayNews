@@ -1,5 +1,10 @@
 package study.com.s_sxl.fmeituan.constant;
 
+import android.support.v4.app.Fragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.fragment.FollowFragment;
 import study.com.s_sxl.fmeituan.fragment.HomeFragment;
@@ -22,5 +27,15 @@ public class TabConstant {
 	public static Class[] getFragments(){
 		Class[] clz={HomeFragment.class,VideoHomeFragment.class,FollowFragment.class,UserFragment.class};
 		return clz;
+	}
+
+	public static List<Fragment> getFragmentList(){
+		List<Fragment> fragments = new ArrayList<>();
+
+		fragments.add(new HomeFragment());
+		fragments.add(new VideoHomeFragment());
+		fragments.add(new FollowFragment());
+		fragments.add(new UserFragment());
+		return fragments;
 	}
 }

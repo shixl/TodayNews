@@ -6,4 +6,8 @@
     <string name="tab_more">我的</string>
     <string name="item_text_test">曾君竹蠢货曾君竹蠢货曾君竹蠢货,曾君竹蠢货曾君竹蠢货曾君竹蠢货.曾君竹蠢货曾君竹蠢货曾君竹蠢货,曾君竹蠢货曾君竹蠢货曾君竹蠢货.</string>
     <string name="text_login">更多的登录方式</string>
+    <string name="login_msg_1">登录后保存阅读习惯</string>
+    <string name="login_msg_2">打造你的专属头条</string>
+    <string name="login_phone">手机号</string>
+    <string name="login_register">发送验证码</string>
 </resources>

@@ -20,31 +20,11 @@
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher" />
 
-            <LinearLayout
-                android:id="@+id/ll_iv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    style="@style/img_sty"
-                    android:src="@mipmap/phone" />
-
-                <ImageView
-                    style="@style/img_sty"
-                    android:src="@mipmap/weixing" />
-
-                <ImageView
-                    style="@style/img_sty"
-                    android:src="@mipmap/qq" />
-
-                <ImageView
-                    style="@style/img_sty"
-                    android:src="@mipmap/weibo" />
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_login"
+                style="@style/img_sty"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/login" />
 
             <TextView
                 android:id="@+id/tv_login"
@@ -52,11 +32,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll_iv"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/tv_selector"
                 android:clickable="true"
-                android:drawablePadding="5dp"
                 android:drawableEnd="@mipmap/iv_right"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="@string/text_login"
@@ -68,11 +49,10 @@
             android:id="@+id/ll_tv"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:orientation="horizontal"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                style="@style/ll_sty">
+            <LinearLayout style="@style/ll_sty">
 
                 <ImageView
                     style="@style/user_img_sty"
@@ -84,8 +64,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/ll_sty">
+            <LinearLayout style="@style/ll_sty">
 
                 <ImageView
                     style="@style/user_img_sty"
@@ -93,13 +72,11 @@
 
                 <TextView
                     style="@style/user_tv_sty"
-                    android:text="夜间"
-                    />
+                    android:text="夜间" />
 
             </LinearLayout>
 
-            <LinearLayout
-              style="@style/ll_sty">
+            <LinearLayout style="@style/ll_sty">
 
                 <ImageView
                     style="@style/user_img_sty"
@@ -107,8 +84,7 @@
 
                 <TextView
                     style="@style/user_tv_sty"
-                    android:text="设置"
-                     />
+                    android:text="设置" />
             </LinearLayout>
         </LinearLayout>
 

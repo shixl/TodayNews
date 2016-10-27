@@ -1,6 +1,8 @@
 package study.com.s_sxl.fmeituan.fragment;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,17 +16,17 @@ import butterknife.OnClick;
 import study.com.s_sxl.carelib.fragment.BaseFragment;
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.constant.Constant;
+import study.com.s_sxl.fmeituan.view.CustomPopupWindow;
 
 public class UserFragment extends BaseFragment {
 
     @Bind(R.id.iv_header)
     ImageView mIvHeader;
 
-    @Bind(R.id.ll_iv)
-    LinearLayout mLlIv;
-
     @Bind(R.id.tv_login)
     TextView mTvLogin;
+    @Bind(R.id.iv_login)
+    ImageView mIvLogin;
 
     @Bind(R.id.ll_tv)
     LinearLayout mLlTv;
@@ -40,6 +42,7 @@ public class UserFragment extends BaseFragment {
     RelativeLayout rlBNews;
     @Bind(R.id.rl_feedBook)
     RelativeLayout rlFeedBook;
+    private CustomPopupWindow mCustomPopupWindow;
 
     /**
      * 初始化方法, 类似OnCreate, 仅在此方法中做初始化操作, findView与事件绑定请使用ButterKnife
@@ -69,6 +72,11 @@ public class UserFragment extends BaseFragment {
 
     }
 
+    @OnClick(R.id.iv_login)
+    public void onIvClick(){
+        mCustomPopupWindow = new CustomPopupWindow(getContext());
+        controlPop(mIvLogin);
+    }
 
     @OnClick({R.id.rl_msg, R.id.rl_off, R.id.rl_play, R.id.rl_buy, R.id.rl_b_news, R.id.rl_feedBook})
     public void onClick(View view) {
@@ -93,4 +101,37 @@ public class UserFragment extends BaseFragment {
                 break;
         }
     }
+
+    /**
+     * 操作窗体
+     * @param mIvLogin
+     */
+    private void controlPop(ImageView mIvLogin) {
+        if (mCustomPopupWindow == null) {
+            initPopupWindow();
+        }
+
+        if (mCustomPopupWindow.isShowing()) {
+            mCustomPopupWindow.dismiss();
+        } else {
+            mCustomPopupWindow.showAtLocation(mIvLogin, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        }
+    }
+
+    /**
+     * 泡泡窗体
+     */
+    private void initPopupWindow() {
+        mCustomPopupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                    mCustomPopupWindow.dismiss();
+                    return true;
+                }
+                return false;
+            }
+    });
+   }
+
 }
