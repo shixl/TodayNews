@@ -22,7 +22,6 @@ public class CustomPopupWindow extends PopupWindow{
     private void initPop(View view) {
         setContentView(view);
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        //setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         setHeight(1100);
         setAnimationStyle(R.style.PopupWindow_animation);
         setFocusable(true);

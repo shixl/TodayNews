@@ -17,12 +17,13 @@
         android:name=".App"
         >
         <activity android:name=".activity.MainActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             >
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
 
         <!-- 必须初始化 -->
@@ -37,17 +38,6 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="sensorLandscape"
             />
-
-        <activity android:name=".activity.HomeNewsActivity">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
     </application>
 
 </manifest>

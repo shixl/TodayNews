@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,20 +90,21 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
     public void updateColor(String tabId){
         if(tabId.equals(TabConstant.getTabsTxt()[1])||tabId.equals(TabConstant.getTabsTxt()[2])){
             if(isFullScreen){
-                resetFragmentView(TabConstant.getFragmentList().get(1));
+                resetFragmentView();
             }
             StatusBarUtil.setColor(this,getResources().getColor(R.color.white),0);
         }else if(tabId.equals(TabConstant.getTabsTxt()[3])){
             isFullScreen = true;
-            StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, null);
+            resetFragmentImageView();
+            StatusBarUtil.setTransparentForImageViewInFragment(MainActivity.this, null);
         }else if(tabId.equals(TabConstant.getTabsTxt()[0])){
             if(isFullScreen){
-                resetFragmentView(TabConstant.getFragmentList().get(0));
+                resetFragmentView();
             }
             StatusBarUtil.setColor(this,getResources().getColor(R.color.red),0);
         }
     }
-    public void resetFragmentView(Fragment fragment) {
+    public void resetFragmentView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             View contentView = findViewById(android.R.id.content);
             if (contentView != null) {
@@ -114,8 +114,24 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
                     rootView.setPadding(0, 0, 0, 0);
                 }
             }
-            if (fragment.getView() != null) {
-                fragment.getView().setPadding(0, getStatusBarHeight(this), 0, 0);
+            if (realTabContent!= null) {
+                realTabContent.setPadding(0, getStatusBarHeight(this), 0, 0);
+            }
+        }
+    }
+
+    public void resetFragmentImageView() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            View contentView = findViewById(android.R.id.content);
+            if (contentView != null) {
+                ViewGroup rootView;
+                rootView = (ViewGroup) ((ViewGroup) contentView).getChildAt(0);
+                if (rootView.getPaddingTop() != 0) {
+                    rootView.setPadding(0, 0, 0, 0);
+                }
+            }
+            if (realTabContent != null){
+                realTabContent.setPadding(0, 0, 0, 0);
             }
         }
     }

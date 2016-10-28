@@ -2,10 +2,11 @@ package study.com.s_sxl.fmeituan.fragment;
 
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -74,7 +75,6 @@ public class UserFragment extends BaseFragment {
 
     @OnClick(R.id.iv_login)
     public void onIvClick(){
-        mCustomPopupWindow = new CustomPopupWindow(getContext());
         controlPop(mIvLogin);
     }
 
@@ -115,6 +115,9 @@ public class UserFragment extends BaseFragment {
             mCustomPopupWindow.dismiss();
         } else {
             mCustomPopupWindow.showAtLocation(mIvLogin, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+            lp.alpha = 0.3f;
+            getActivity().getWindow().setAttributes(lp);
         }
     }
 
@@ -122,16 +125,16 @@ public class UserFragment extends BaseFragment {
      * 泡泡窗体
      */
     private void initPopupWindow() {
-        mCustomPopupWindow.setTouchInterceptor(new View.OnTouchListener() {
+        mCustomPopupWindow = new CustomPopupWindow(getContext());
+        mCustomPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                    mCustomPopupWindow.dismiss();
-                    return true;
-                }
-                return false;
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getActivity().getWindow()
+                        .getAttributes();// 1.设置完全透明主题
+                lp.alpha = 1.0f;// 2. 设置window的alpha值 (0.0 - 1.0)
+                getActivity().getWindow().setAttributes(lp);
             }
-    });
+        });
    }
 
 }
