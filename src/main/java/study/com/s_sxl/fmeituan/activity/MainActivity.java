@@ -45,6 +45,9 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
 
     }
 
+    /**
+     * 初始化tab页
+     */
     private void initTab() {
         String tabs[]= TabConstant.getTabsTxt();
         for(int i=0;i<tabs.length;i++){
@@ -54,6 +57,11 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
         }
     }
 
+    /**
+     * 处理tab的图标与文本
+     * @param idx
+     * @return
+     */
     private View getTabView(int idx){
         View view= LayoutInflater.from(this).inflate(R.layout.view_tab_content,null);
         ((TextView)view.findViewById(R.id.tv_tab_text)).setText(TabConstant.getTabsTxt()[idx]);
@@ -87,6 +95,10 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
         }
     }
 
+    /**
+     * 更新不同fragment浸入状态栏的颜色
+     * @param tabId
+     */
     public void updateColor(String tabId){
         if(tabId.equals(TabConstant.getTabsTxt()[1])||tabId.equals(TabConstant.getTabsTxt()[2])){
             if(isFullScreen){
@@ -104,6 +116,10 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             StatusBarUtil.setColor(this,getResources().getColor(R.color.red),0);
         }
     }
+
+    /**
+     *处理fragment浸入状态栏
+     */
     public void resetFragmentView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             View contentView = findViewById(android.R.id.content);
@@ -120,6 +136,9 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
         }
     }
 
+    /**
+     * 处理我的页面头部图片浸入状态栏
+     */
     public void resetFragmentImageView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             View contentView = findViewById(android.R.id.content);
@@ -136,14 +155,21 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
         }
     }
 
+    /**
+     * 设置状态栏颜色
+     */
     @Override
     protected void setStatusBar() {
         isFullScreen = true;
         StatusBarUtil.setColor(this,getResources().getColor(R.color.red),0);
     }
 
+    /**
+     *  获得状态栏高度
+     * @param context
+     * @return
+     */
     private static int getStatusBarHeight(Context context) {
-        // 获得状态栏高度
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         return context.getResources().getDimensionPixelSize(resourceId);
     }

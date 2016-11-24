@@ -15,21 +15,26 @@ import com.squareup.picasso.Picasso;
 import butterknife.Bind;
 import butterknife.OnClick;
 import study.com.s_sxl.carelib.fragment.BaseFragment;
+import study.com.s_sxl.carelib.viewUtils.PullScrollView;
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.constant.Constant;
 import study.com.s_sxl.fmeituan.view.CustomPopupWindow;
 
-public class UserFragment extends BaseFragment {
+public class UserFragment extends BaseFragment implements PullScrollView.OnTurnListener {
 
     @Bind(R.id.iv_header)
     ImageView mIvHeader;
 
+    @Bind(R.id.scroll_view)
+    PullScrollView mScrollView;
+
     @Bind(R.id.tv_login)
     TextView mTvLogin;
+
     @Bind(R.id.iv_login)
     ImageView mIvLogin;
 
-    @Bind(R.id.ll_tv)
+    @Bind(R.id.ll_tv_set)
     LinearLayout mLlTv;
     @Bind(R.id.rl_msg)
     RelativeLayout rlMsg;
@@ -53,6 +58,8 @@ public class UserFragment extends BaseFragment {
     @Override
     protected void init(Bundle savedInstanceState) {
         Picasso.with(getContext()).load(Constant.URL_USER).into(mIvHeader);
+        mScrollView.setHeader(mIvHeader);
+        mScrollView.setOnTurnListener(this);
     }
 
     /**
@@ -82,7 +89,7 @@ public class UserFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_msg:
-
+                showToastMessage("测试");
                 break;
             case R.id.rl_off:
 
@@ -137,4 +144,8 @@ public class UserFragment extends BaseFragment {
         });
    }
 
+    @Override
+    public void onTurn() {
+
+    }
 }

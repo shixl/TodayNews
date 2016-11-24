@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:id="@+id/ll_tv_set"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <LinearLayout style="@style/ll_sty">
+
+        <ImageView
+            style="@style/user_img_sty"
+            android:src="@mipmap/collection" />
+
+        <TextView
+            style="@style/user_tv_sty"
+            android:text="收藏" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/ll_sty">
+
+        <ImageView
+            style="@style/user_img_sty"
+            android:src="@mipmap/night" />
+
+        <TextView
+            style="@style/user_tv_sty"
+            android:text="夜间" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/ll_sty">
+
+        <ImageView
+            style="@style/user_img_sty"
+            android:src="@mipmap/setting" />
+
+        <TextView
+            style="@style/user_tv_sty"
+            android:text="设置" />
+    </LinearLayout>
+
+</LinearLayout>
