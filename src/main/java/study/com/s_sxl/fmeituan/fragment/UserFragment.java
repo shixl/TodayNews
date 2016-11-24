@@ -80,12 +80,8 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
 
     }
 
-    @OnClick(R.id.iv_login)
-    public void onIvClick(){
-        controlPop(mIvLogin);
-    }
 
-    @OnClick({R.id.rl_msg, R.id.rl_off, R.id.rl_play, R.id.rl_buy, R.id.rl_b_news, R.id.rl_feedBook})
+    @OnClick({R.id.rl_msg, R.id.rl_off, R.id.rl_play, R.id.rl_buy, R.id.rl_b_news, R.id.rl_feedBook,R.id.iv_login})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_msg:
@@ -105,6 +101,9 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
                 break;
             case R.id.rl_feedBook:
 
+                break;
+            case R.id.iv_login:
+                controlPop(mIvLogin);
                 break;
         }
     }

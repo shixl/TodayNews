@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#dc2f69</color>
     <color name="main">#3ca5b6</color>
     <color name="divider">#ddd</color>
     <color name="tab_text">#C8C7C3</color>
