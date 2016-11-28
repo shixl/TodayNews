@@ -18,9 +18,10 @@ import study.com.s_sxl.carelib.fragment.BaseFragment;
 import study.com.s_sxl.carelib.viewUtils.PullScrollView;
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.constant.Constant;
+import study.com.s_sxl.fmeituan.db.DbHelper;
 import study.com.s_sxl.fmeituan.view.CustomPopupWindow;
 
-public class UserFragment extends BaseFragment implements PullScrollView.OnTurnListener {
+public class UserFragment extends BaseFragment implements PullScrollView.OnTurnListener, CustomPopupWindow.OnGetUserInfoListener {
 
     @Bind(R.id.iv_header)
     ImageView mIvHeader;
@@ -49,6 +50,7 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
     @Bind(R.id.rl_feedBook)
     RelativeLayout rlFeedBook;
     private CustomPopupWindow mCustomPopupWindow;
+    private DbHelper mDbHelper;
 
     /**
      * 初始化方法, 类似OnCreate, 仅在此方法中做初始化操作, findView与事件绑定请使用ButterKnife
@@ -60,6 +62,8 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
         Picasso.with(getContext()).load(Constant.URL_USER).into(mIvHeader);
         mScrollView.setHeader(mIvHeader);
         mScrollView.setOnTurnListener(this);
+        mDbHelper = new DbHelper();
+        mDbHelper.initSQLite(getContext());
     }
 
     /**
@@ -131,7 +135,7 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
      * 泡泡窗体
      */
     private void initPopupWindow() {
-        mCustomPopupWindow = new CustomPopupWindow(getContext());
+        mCustomPopupWindow = new CustomPopupWindow(getContext(),mDbHelper);
         mCustomPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -141,10 +145,17 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
                 getActivity().getWindow().setAttributes(lp);
             }
         });
+
+        mCustomPopupWindow.setOnGetUserInfoListener(this);
    }
 
     @Override
     public void onTurn() {
 
+    }
+
+    @Override
+    public void getUserInfoData(String str) {
+        showToastMessage(str);
     }
 }
