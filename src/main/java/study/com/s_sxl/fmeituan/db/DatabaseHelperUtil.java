@@ -37,6 +37,6 @@ public class DatabaseHelperUtil extends SQLiteOpenHelper {
                 + "password" +" TEXT,"
                 + "headImg" + " TEXT,"
                 + "nickname" + " TEXT,"
-                + "phoneNumber" + "TEXT);");
+                + "phoneNumber" + " TEXT);");
     }
 }

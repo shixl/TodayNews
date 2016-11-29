@@ -10,13 +10,13 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import butterknife.Bind;
 import butterknife.OnClick;
 import study.com.s_sxl.carelib.fragment.BaseFragment;
+import study.com.s_sxl.carelib.utils.PreferencesHelper;
 import study.com.s_sxl.carelib.viewUtils.PullScrollView;
 import study.com.s_sxl.fmeituan.R;
+import study.com.s_sxl.fmeituan.bean.UserBean;
 import study.com.s_sxl.fmeituan.constant.Constant;
 import study.com.s_sxl.fmeituan.db.DbHelper;
 import study.com.s_sxl.fmeituan.view.CustomPopupWindow;
@@ -50,7 +50,6 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
     @Bind(R.id.rl_feedBook)
     RelativeLayout rlFeedBook;
     private CustomPopupWindow mCustomPopupWindow;
-    private DbHelper mDbHelper;
 
     /**
      * 初始化方法, 类似OnCreate, 仅在此方法中做初始化操作, findView与事件绑定请使用ButterKnife
@@ -59,11 +58,9 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
      */
     @Override
     protected void init(Bundle savedInstanceState) {
-        Picasso.with(getContext()).load(Constant.URL_USER).into(mIvHeader);
+        //Picasso.with(getContext()).load(Constant.URL_USER).into(mIvHeader);
         mScrollView.setHeader(mIvHeader);
         mScrollView.setOnTurnListener(this);
-        mDbHelper = new DbHelper();
-        mDbHelper.initSQLite(getContext());
     }
 
     /**
@@ -135,7 +132,7 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
      * 泡泡窗体
      */
     private void initPopupWindow() {
-        mCustomPopupWindow = new CustomPopupWindow(getContext(),mDbHelper);
+        mCustomPopupWindow = new CustomPopupWindow(getContext(),new DbHelper());
         mCustomPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -155,7 +152,10 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
     }
 
     @Override
-    public void getUserInfoData(String str) {
-        showToastMessage(str);
+    public void getUserInfoData(UserBean data) {
+        PreferencesHelper.saveBoolean(Constant.IS_FIRST ,true);
+        mTvLogin.setText(data.userName);
+        mTvLogin.setEnabled(false);
+        mIvLogin.setImageResource(R.mipmap.ic_launcher);
     }
 }

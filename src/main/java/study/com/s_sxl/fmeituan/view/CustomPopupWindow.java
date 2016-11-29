@@ -2,6 +2,7 @@ package study.com.s_sxl.fmeituan.view;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import study.com.s_sxl.carelib.utils.ToastMgr;
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.bean.UserBean;
 import study.com.s_sxl.fmeituan.db.DbHelper;
@@ -33,6 +35,9 @@ public class CustomPopupWindow extends PopupWindow {
 
     private Context mContext;
     private DbHelper mDbHelper;
+    private String phoneNumber;
+    private String psd;
+    private OnGetUserInfoListener mOnGetUserInfoListener;
 
     public CustomPopupWindow(Context context, DbHelper dbHelper) {
         this.mContext = context;
@@ -40,8 +45,13 @@ public class CustomPopupWindow extends PopupWindow {
         View view = LayoutInflater.from(mContext).inflate(R.layout.user_login, null);
         ButterKnife.bind(this, view);
         initPop(view);
+        mDbHelper.initSQLite(context);
     }
 
+    /**
+     * 初始化窗体
+     * @param view
+     */
     private void initPop(View view) {
         setContentView(view);
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -62,39 +72,65 @@ public class CustomPopupWindow extends PopupWindow {
 
                 break;
             case R.id.tv_login:
-                UserBean user = new UserBean();
-                user.phoneNumber =  mEtName.getText().toString().trim();
-                user.password = mEtPwd.getText().toString().trim();
-                user.userName = "止于最好";
-                user.headImg = "http://img4.imgtn.bdimg.com/it/u=2894838897,3395831603&fm=21&gp=0.jpg";
-                user.nickName ="nidaye";
-                mDbHelper.addUser(user,new StringBuffer());
+                phoneNumber = mEtName.getText().toString().trim();
+                psd = mEtPwd.getText().toString().trim();
 
-                if(mOnGetUserInfoListener != null){
-                    mOnGetUserInfoListener.getUserInfoData(user.userName);
+                if (phoneNumber.equals("") || psd.equals("")) {
+                    ToastMgr.show("用户名或密码不能为空");
+                    return;
                 }
 
-                reSet();
-                dismiss();
+                UserBean user = new UserBean();
+                mDbHelper.getUserInfo(user, new StringBuffer());
+
+                if(TextUtils.isEmpty(user.phoneNumber) && TextUtils.isEmpty(user.password)){
+                    saveUser(user);
+                    if (mOnGetUserInfoListener != null) {
+                        mOnGetUserInfoListener.getUserInfoData(user);
+                   }
+                    reSet();
+                }else if(user.phoneNumber.equals(phoneNumber)&& user.password.equals(psd)){
+                    reSet();
+                    ToastMgr.show("登录成功");
+                }else {
+                    ToastMgr.show("用户名或密码错误");
+                    return;
+                }
+
                 break;
         }
     }
 
-    private OnGetUserInfoListener mOnGetUserInfoListener;
+    /**
+     * 保存用户信息
+     * @param user
+     */
+    public void saveUser(UserBean user) {
+        user.phoneNumber = phoneNumber;
+        user.password = psd;
+        user.userName = "止于最好";
+        user.headImg = "http://img4.imgtn.bdimg.com/it/u=2894838897,3395831603&fm=21&gp=0.jpg";
+        user.nickName = "nidaye";
+        mDbHelper.addUser(user, new StringBuffer());
+    }
 
-    public void setOnGetUserInfoListener(OnGetUserInfoListener onGetUserInfoListener){
+    public void setOnGetUserInfoListener(OnGetUserInfoListener onGetUserInfoListener) {
         mOnGetUserInfoListener = onGetUserInfoListener;
+    }
+
+    /**
+     * 重置窗体各类信息
+     */
+    public void reSet() {
+        mEtName.setText("");
+        mEtPwd.setText("");
+        dismiss();
     }
 
     /**
      * 用户信息的回调接口
      */
-    public interface OnGetUserInfoListener{
-        void getUserInfoData(String str);
-    }
-
-    public void reSet(){
-        mEtName.setText("");
-        mEtPwd.setText("");
+    public interface OnGetUserInfoListener {
+        void getUserInfoData(UserBean data);
     }
 }

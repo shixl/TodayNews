@@ -12,6 +12,7 @@ public class DbHelper {
    // private Context mContext;
    // private String mDbPath;
     private SQLiteDatabase mDb;
+    private SQLiteOpenHelper mInstance;
     //private String mFilePath;
 
     /**
@@ -19,9 +20,15 @@ public class DbHelper {
      * @param context
      */
     public void initSQLite(Context context){
-        SQLiteOpenHelper instance = DatabaseHelperUtil.getInstance(context);
-        instance.getReadableDatabase();
-        mDb = instance.getWritableDatabase();
+        mInstance = DatabaseHelperUtil.getInstance(context);
+        mInstance.getReadableDatabase();
+    }
+
+    public SQLiteDatabase getDb(){
+        if(mDb == null){
+            mDb = mInstance.getWritableDatabase();
+        }
+        return mDb;
     }
 
   /*  *//**
@@ -61,10 +68,10 @@ public class DbHelper {
      * @return
      */
     public boolean addUser(UserBean bean ,StringBuffer str){
-
+        getDb();
         str.setLength(0);
 
-        String sqlStr = String.format("insert into users(username,password,headImg,nickname,phoneNumber) values (%s,%s,%s,%s,%s)",bean.userName,
+        String sqlStr = String.format("insert into users(username,password,headImg,nickname,phoneNumber) values ('%s','%s','%s','%s','%s')",bean.userName,
                     bean.password,bean.headImg,bean.nickName,bean.phoneNumber);
 
         try {
@@ -85,19 +92,20 @@ public class DbHelper {
      * @return
      */
     public boolean getUserInfo(UserBean bean ,StringBuffer str){
-
+        getDb();
         str.setLength(0);
 
         Cursor cursor = null;
 
-        String sqlStr =String.format( "select * from users where password = %s and phoneNumber = %s",bean.password,bean.phoneNumber);
+        //String sqlStr =String.format( "select * from users where password = %s and phoneNumber = %s",bean.password,bean.phoneNumber);
+        String sqlStr = "select * from users";
 
         try {
             cursor = mDb.rawQuery(sqlStr,null);
 
             while (cursor.moveToNext()){
-                bean.userName = cursor.getString(cursor.getColumnIndex("username"));
-                bean.headImg = cursor.getString(cursor.getColumnIndex("headImg"));
+                bean.password = cursor.getString(cursor.getColumnIndex("password"));
+                bean.phoneNumber = cursor.getString(cursor.getColumnIndex("phoneNumber"));
             }
         }catch (Exception e){
             e.printStackTrace();
