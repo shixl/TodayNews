@@ -89,7 +89,7 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_msg:
-                showToastMessage("测试");
+
                 break;
             case R.id.rl_off:
 
