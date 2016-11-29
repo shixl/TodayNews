@@ -90,7 +90,6 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
         switch (view.getId()) {
             case R.id.rl_msg:
 
-
                 break;
             case R.id.rl_off:
 
