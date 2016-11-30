@@ -68,38 +68,45 @@ public class CustomPopupWindow extends PopupWindow {
         switch (view.getId()) {
             case R.id.iv_close:
 
-                dismiss();
+                reSet();
 
                 break;
             case R.id.tv_login:
-                phoneNumber = mEtName.getText().toString().trim();
-                psd = mEtPwd.getText().toString().trim();
-
-                if (phoneNumber.equals("") || psd.equals("")) {
-                    ToastMgr.show("用户名或密码不能为空");
-                    return;
-                }
-
-                UserBean user = new UserBean();
-                mDbHelper.getUserInfo(user, new StringBuffer());
-
-                if(TextUtils.isEmpty(user.phoneNumber) && TextUtils.isEmpty(user.password)){
-                    saveUser(user);
-                    if (mOnGetUserInfoListener != null) {
-                        mOnGetUserInfoListener.getUserInfoData(user);
-                   }
-                    reSet();
-                }else if(user.phoneNumber.equals(phoneNumber)&& user.password.equals(psd)){
-                    if (mOnGetUserInfoListener != null) {
-                        mOnGetUserInfoListener.getUserInfoData(user);
-                    }
-                    reSet();
-                }else {
-                    ToastMgr.show("用户名或密码错误");
-                    return;
-                }
+                login();
 
                 break;
+        }
+    }
+
+    /**
+     * 登录相关操作
+     */
+    private void login() {
+        phoneNumber = mEtName.getText().toString().trim();
+        psd = mEtPwd.getText().toString().trim();
+
+        if (phoneNumber.equals("") || psd.equals("")) {
+            ToastMgr.show("用户名或密码不能为空");
+            return;
+        }
+
+        UserBean user = new UserBean();
+        mDbHelper.getUserInfo(user, new StringBuffer());
+
+        if(TextUtils.isEmpty(user.phoneNumber) && TextUtils.isEmpty(user.password)){
+            saveUser(user);
+            if (mOnGetUserInfoListener != null) {
+                mOnGetUserInfoListener.getUserInfoData(user);
+           }
+            reSet();
+        }else if(user.phoneNumber.equals(phoneNumber)&& user.password.equals(psd)){
+            if (mOnGetUserInfoListener != null) {
+                mOnGetUserInfoListener.getUserInfoData(user);
+            }
+            reSet();
+        }else {
+            ToastMgr.show("用户名或密码错误");
+            return;
         }
     }
 
@@ -107,7 +114,7 @@ public class CustomPopupWindow extends PopupWindow {
      * 保存用户信息
      * @param user
      */
-    public void saveUser(UserBean user) {
+    private void saveUser(UserBean user) {
         user.phoneNumber = phoneNumber;
         user.password = psd;
         user.userName = "止于最好";
@@ -123,7 +130,7 @@ public class CustomPopupWindow extends PopupWindow {
     /**
      * 重置窗体各类信息
      */
-    public void reSet() {
+    private void reSet() {
         mEtName.setText("");
         mEtPwd.setText("");
         dismiss();
