@@ -90,8 +90,10 @@ public class CustomPopupWindow extends PopupWindow {
                    }
                     reSet();
                 }else if(user.phoneNumber.equals(phoneNumber)&& user.password.equals(psd)){
+                    if (mOnGetUserInfoListener != null) {
+                        mOnGetUserInfoListener.getUserInfoData(user);
+                    }
                     reSet();
-                    ToastMgr.show("登录成功");
                 }else {
                     ToastMgr.show("用户名或密码错误");
                     return;

@@ -7,9 +7,7 @@ import android.view.animation.LinearInterpolator;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.view.ViewHelper;
 
-/**
- * Created by Ybao on 2015/11/7 0007.
- */
+
 public class AnimUtil {
     public static void startRotation(View view, float toRotation) {
         ObjectAnimator.ofFloat(view, "rotation", ViewHelper.getRotation(view), toRotation).start();

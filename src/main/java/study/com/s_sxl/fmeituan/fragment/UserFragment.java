@@ -10,11 +10,16 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 import study.com.s_sxl.carelib.fragment.BaseFragment;
 import study.com.s_sxl.carelib.utils.PreferencesHelper;
+import study.com.s_sxl.carelib.utils.ToastMgr;
 import study.com.s_sxl.carelib.viewUtils.PullScrollView;
+import study.com.s_sxl.carelib.viewUtils.roundedimageview.RoundedTransformationBuilder;
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.bean.UserBean;
 import study.com.s_sxl.fmeituan.constant.Constant;
@@ -50,6 +55,7 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
     @Bind(R.id.rl_feedBook)
     RelativeLayout rlFeedBook;
     private CustomPopupWindow mCustomPopupWindow;
+    private boolean flag;
 
     /**
      * 初始化方法, 类似OnCreate, 仅在此方法中做初始化操作, findView与事件绑定请使用ButterKnife
@@ -61,6 +67,8 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
         //Picasso.with(getContext()).load(Constant.URL_USER).into(mIvHeader);
         mScrollView.setHeader(mIvHeader);
         mScrollView.setOnTurnListener(this);
+        //判断是否登陆过
+        flag = PreferencesHelper.getBooleanData(Constant.IS_FIRST);
     }
 
     /**
@@ -104,7 +112,11 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
 
                 break;
             case R.id.iv_login:
-                controlPop(mIvLogin);
+                if(flag){
+
+                }else{
+                    controlPop(mIvLogin);
+                }
                 break;
         }
     }
@@ -153,9 +165,13 @@ public class UserFragment extends BaseFragment implements PullScrollView.OnTurnL
 
     @Override
     public void getUserInfoData(UserBean data) {
+        flag = true;
         PreferencesHelper.saveBoolean(Constant.IS_FIRST ,true);
         mTvLogin.setText(data.userName);
         mTvLogin.setEnabled(false);
-        mIvLogin.setImageResource(R.mipmap.ic_launcher);
+        RequestCreator creator = Picasso.with(getContext()).load(data.headImg).resize(45, 45)
+                .centerCrop().transform(new RoundedTransformationBuilder().oval(true).build());
+        creator.into(mIvLogin);
+        ToastMgr.show("登陆成功");
     }
 }

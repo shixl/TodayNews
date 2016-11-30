@@ -20,6 +20,7 @@ import butterknife.Bind;
 import study.com.s_sxl.carelib.activity.BaseActivity;
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.constant.TabConstant;
+import study.com.s_sxl.fmeituan.utils.AndroidBug5497Workaround;
 
 public class MainActivity extends BaseActivity implements TabHost.OnTabChangeListener {
 
@@ -42,7 +43,6 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
         mTab.getTabWidget().setDividerDrawable(null);
         initTab();
         mTab.setOnTabChangedListener(this);
-
     }
 
     /**
