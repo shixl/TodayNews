@@ -2,14 +2,7 @@ package study.com.s_sxl.fmeituan.bean;
 
 import java.io.Serializable;
 
-/**
- * Copyright  @2016 珞珈德毅. All rights reserved.
- * <p>Description: 视频描述类</p>
- * @ClassName VideoBean
- * @Package study.com.s_sxl.fmeituan.bean
- * @Author S_sxl
- * @Time 2016/10/12
- */
+@Deprecated
 public class VideoBean implements Serializable {
     //用户头像
     public String headImgUrl;

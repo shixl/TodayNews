@@ -3,10 +3,14 @@ package study.com.s_sxl.fmeituan.constant;
 import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import study.com.s_sxl.fmeituan.App;
+import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.bean.NewsBean;
 import study.com.s_sxl.fmeituan.bean.VideoBean;
+import study.com.s_sxl.fmeituan.bean.VideoChannelTable;
 import study.com.s_sxl.fmeituan.fragment.homeFragments.HeadLineFragment;
 import study.com.s_sxl.fmeituan.fragment.homeFragments.HotspotFragment;
 import study.com.s_sxl.fmeituan.fragment.homeFragments.LocalFragment;
@@ -102,17 +106,15 @@ public class DataSimulation {
         return list;
     }
 
-  /*  public List<T> getRecords(Class<T> clz, int number) {
+    public List<VideoChannelTable> getVideosChannels(){
+        List<String> channelName = Arrays.asList(App.getAppResources().getStringArray(R.array.video_channel_name));
+        List<String> channelId = Arrays.asList(App.getAppResources().getStringArray(R.array.video_channel_id));
 
-        try {
-            for (int i = 0; i < number; i++) {
-                T t = clz.newInstance();
-                mDataList.add(t);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        ArrayList<VideoChannelTable>newsChannelTables=new ArrayList<>();
+        for (int i = 0; i < channelName.size(); i++) {
+            VideoChannelTable entity = new VideoChannelTable(channelId.get(i), channelName.get(i));
+            newsChannelTables.add(entity);
         }
-
-        return mDataList;
-    }*/
+        return newsChannelTables;
+    }
 }

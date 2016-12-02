@@ -1,29 +1,26 @@
 package study.com.s_sxl.fmeituan.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import java.util.List;
+import com.aspsine.irecyclerview.IRecyclerView;
+import com.aspsine.irecyclerview.universaladapter.ViewHolderHelper;
+import com.aspsine.irecyclerview.universaladapter.recyclerview.CommonRecycleViewAdapter;
 
 import butterknife.Bind;
 import study.com.s_sxl.carelib.fragment.BaseFragment;
 import study.com.s_sxl.carelib.viewUtils.NavBar;
 import study.com.s_sxl.fmeituan.R;
-import study.com.s_sxl.fmeituan.activity.PlayVideoActivity;
-import study.com.s_sxl.fmeituan.adapter.VideoAdapter;
-import study.com.s_sxl.fmeituan.bean.VideoBean;
-import study.com.s_sxl.fmeituan.constant.DataSimulation;
+import study.com.s_sxl.fmeituan.bean.VideoData;
 
-public class VideoHomeFragment extends BaseFragment implements VideoAdapter.OnClickItemListener {
+public class VideoHomeFragment extends BaseFragment {
 
     @Bind(R.id.nvBar)
     NavBar mBavBar;
-    @Bind(R.id.recycler)
-    RecyclerView mRecycler;
-    private List<VideoBean> mVideos;
+
+    @Bind(R.id.irc)
+    IRecyclerView mRecycler;
 
     /**
      * 初始化方法, 类似OnCreate, 仅在此方法中做初始化操作, findView与事件绑定请使用ButterKnife
@@ -55,20 +52,21 @@ public class VideoHomeFragment extends BaseFragment implements VideoAdapter.OnCl
                 showToastMessage("视频搜索");
             }
         });
-        mVideos = DataSimulation.getInstance().getVideos(10);
         initView();
     }
 
     private void initView() {
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        VideoAdapter mAdapter = new VideoAdapter(getContext(),mVideos);
-        mRecycler.setAdapter(mAdapter);
-        mAdapter.setOnClicItemkListener(this);
+        new CommonRecycleViewAdapter<VideoData>(getContext(), R.layout.item_video_list) {
+            @Override
+            public void convert(ViewHolderHelper helper, VideoData videoData) {
+                helper.setImageRoundUrl(R.id.iv_logo,videoData.getTopicImg());
+                helper.setText(R.id.tv_from,videoData.getTopicName());
+                helper.setText(R.id.tv_play_time,String.format(getResources().getString(R.string.video_play_times),
+                        String.valueOf(videoData.getPlayCount())));
+
+            }
+        };
     }
 
-    @Override
-    public void OnClick(int position) {
-        Intent intent = new Intent(getActivity(), PlayVideoActivity.class);
-        getActivity().startActivity(intent);
-    }
 }

@@ -23,7 +23,7 @@ import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.VideoView;
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.view.CustomMediaController;
-
+@Deprecated
 public class PlayVideoActivity extends Activity implements Runnable{
 
     private final static String Path = Environment.getExternalStorageDirectory() + "/Test/你大爷额的测试视屏.mp4";

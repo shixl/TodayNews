@@ -11,4 +11,5 @@
     <string name="login_phone">手机号</string>
     <string name="login_register">发送验证码</string>
     <string name="send_register">请发送验证码</string>
+    <string name="video_play_times">%1$s次播放</string>
 </resources>
