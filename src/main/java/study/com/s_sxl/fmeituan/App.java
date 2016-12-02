@@ -1,14 +1,14 @@
 package study.com.s_sxl.fmeituan;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 
 import io.vov.vitamio.Vitamio;
+import study.com.s_sxl.carelib.BaseApplication;
 import study.com.s_sxl.carelib.utils.PreferencesHelper;
 import study.com.s_sxl.carelib.utils.ToastMgr;
 
-public class App extends Application {
+public class App extends BaseApplication {
 
     public static App baseApp;
 

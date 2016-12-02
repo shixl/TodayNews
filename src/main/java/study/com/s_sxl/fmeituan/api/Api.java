@@ -21,7 +21,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import study.com.s_sxl.fmeituan.App;
-import study.com.s_sxl.fmeituan.utils.NetWorkUtils;
+import study.com.s_sxl.carelib.utils.NetWorkUtils;
 
 public class Api {
     //读时超长

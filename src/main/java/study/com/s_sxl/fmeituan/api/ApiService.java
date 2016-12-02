@@ -10,7 +10,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 import rx.Observable;
-import study.com.s_sxl.fmeituan.bean.BaseRespose;
+import study.com.s_sxl.carelib.bean.BaseRespose;
 import study.com.s_sxl.fmeituan.bean.NewsDetail;
 import study.com.s_sxl.fmeituan.bean.NewsSummary;
 import study.com.s_sxl.fmeituan.bean.UserBean;
