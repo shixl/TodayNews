@@ -43,6 +43,7 @@ public class VideoListPresenter extends VideosListContract.Presenter {
                 mView.showErrorTip(message);
             }
         }));*/
+
         List<VideoData> videoDatas = DataSimulation.getInstance().getVideos(startPage + 10);
         mView.returnVideosListData(videoDatas);
     }
