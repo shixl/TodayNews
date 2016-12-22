@@ -1,6 +1,5 @@
 package study.com.s_sxl.fmeituan.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -8,7 +7,6 @@ import butterknife.Bind;
 import butterknife.OnClick;
 import study.com.s_sxl.carelib.fragment.BaseFragment;
 import study.com.s_sxl.fmeituan.R;
-import study.com.s_sxl.fmeituan.activity.PlayVideoActivity;
 
 public class FollowFragment extends BaseFragment {
 
@@ -38,6 +36,6 @@ public class FollowFragment extends BaseFragment {
 
     @OnClick(R.id.tv_up)
     public void onClick() {
-        startActivity(new Intent(getActivity(), PlayVideoActivity.class));
+
     }
 }

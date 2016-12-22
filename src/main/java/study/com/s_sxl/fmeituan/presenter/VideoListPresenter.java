@@ -2,9 +2,8 @@ package study.com.s_sxl.fmeituan.presenter;
 
 import java.util.List;
 
-import study.com.s_sxl.carelib.baseRx.RxSubscriber;
-import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.bean.VideoData;
+import study.com.s_sxl.fmeituan.constant.DataSimulation;
 import study.com.s_sxl.fmeituan.contract.VideosListContract;
 
 /**
@@ -17,23 +16,17 @@ public class VideoListPresenter extends VideosListContract.Presenter {
     @Override
     public void onStart() {
         super.onStart();
-//        //监听返回顶部动作
-//       mRxManage.on(AppConstant.NEWS_LIST_TO_TOP, new Action1<Object>() {
-//           @Override
-//           public void call(Object o) {
-//            mView.scrolltoTop();
-//           }
-//       });
+
     }
 
     /**
      * 获取视频列表请求
-     * @param type
+
      * @param startPage
      */
     @Override
-    public void getVideosListDataRequest(String type, int startPage) {
-        mRxManage.add(mModel.getVideosListData(type,startPage).subscribe(new RxSubscriber<List<VideoData>>(mContext,false) {
+    public void getVideosListDataRequest(int startPage) {
+       /* mRxManage.add(mModel.getVideosListData(type,startPage).subscribe(new RxSubscriber<List<VideoData>>(mContext,false) {
             @Override
             public void onStart() {
                 super.onStart();
@@ -49,6 +42,8 @@ public class VideoListPresenter extends VideosListContract.Presenter {
             protected void _onError(String message) {
                 mView.showErrorTip(message);
             }
-        }));
+        }));*/
+        List<VideoData> videoDatas = DataSimulation.getInstance().getVideos(startPage + 10);
+        mView.returnVideosListData(videoDatas);
     }
 }

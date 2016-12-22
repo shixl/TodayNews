@@ -9,7 +9,6 @@
 
     <RelativeLayout
         android:id="@+id/rl_root"
-        android:background="?attr/dayNightBackground"
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
@@ -48,7 +47,6 @@
             android:gravity="center"
             android:layout_marginRight="16dp"
             android:layout_alignParentBottom="true"
-            android:textColor="?attr/dayNightTwoTextColor"
             android:textSize="16sp"
             tools:text="1111次播放"/>
 

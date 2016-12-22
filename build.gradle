@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         applicationId "study.com.s_sxl.fmeituan"
@@ -24,7 +24,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile project(':coreLibs')
-    compile project(':vitamio');
-    compile project(':jcvideoplayer');
-    compile project(':irecyclerview');
+    compile project(':jcvideoplayer')
+    compile project(':irecyclerview')
 }

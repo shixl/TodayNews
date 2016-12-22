@@ -9,8 +9,8 @@ import java.util.List;
 import study.com.s_sxl.fmeituan.App;
 import study.com.s_sxl.fmeituan.R;
 import study.com.s_sxl.fmeituan.bean.NewsBean;
-import study.com.s_sxl.fmeituan.bean.VideoBean;
 import study.com.s_sxl.fmeituan.bean.VideoChannelTable;
+import study.com.s_sxl.fmeituan.bean.VideoData;
 import study.com.s_sxl.fmeituan.fragment.homeFragments.HeadLineFragment;
 import study.com.s_sxl.fmeituan.fragment.homeFragments.HotspotFragment;
 import study.com.s_sxl.fmeituan.fragment.homeFragments.LocalFragment;
@@ -91,16 +91,37 @@ public class DataSimulation {
      * @param number
      * @return
      */
-    public List<VideoBean> getVideos(int number){
-        List<VideoBean> list = new ArrayList<>(number);
+    public List<VideoData> getVideos(int number){
+        List<VideoData> list = new ArrayList<>(number);
 
         for(int i = 0; i < number;i++){
-            VideoBean bean = new VideoBean();
-            bean.headImgUrl = "http://img4.imgtn.bdimg.com/it/u=2894838897,3395831603&fm=21&gp=0.jpg";
-            bean.videoPcUrl = "http://img2.imgtn.bdimg.com/it/u=475333573,2921291647&fm=21&gp=0.jpg";
-            bean.playTimes = "999万次评论";
-            bean.comment = "999";
-            bean.userName = "小胖子";
+            VideoData bean = new VideoData();
+            VideoData.VideoTopicBean videoTopicBean = new VideoData.VideoTopicBean();
+            bean.setTopicImg("http://vimg1.ws.126.net/image/snapshot/2016/6/B/7/VBOLSG6B7.jpg");
+            bean.setVideosource("新媒体");
+            bean.setMp4Hd_url("");
+            bean.setTopicDesc("把最好的电影分享给你！");
+            bean.setCover("http://vimg2.ws.126.net/image/snapshot/2016/12/C/L/VC7VEAQCL.jpg");
+            bean.setDescription("");
+            bean.setLength(162);
+            bean.setM3u8Hd_url("");
+            bean.setM3u8_url("http://flv2.bn.netease.com/tvmrepo/2016/12/Q/M/EC7VDI6QM/SD/movie_index.m3u8");
+            bean.setMp4_url("http://flv2.bn.netease.com/tvmrepo/2016/12/Q/M/EC7VDI6QM/SD/EC7VDI6QM-mobile.mp4");
+            bean.setPlayCount(998);
+            bean.setPlayersize(1);
+            bean.setPtime("12-22 14:34");
+            bean.setReplyBoard("video_bbs");
+            bean.setReplyid("C7VDJB91008535RB");
+            bean.setSectiontitle("");
+            bean.setTitle("为解救午马和村民，郑少秋、梁朝伟等几人不得不退缩");
+            bean.setTopicName("放映厅");
+            bean.setTopicSid("VBOLSG6B5");
+            bean.setVid("VC7VDJB91");
+            videoTopicBean.setAlias("听财哥讲财经");
+            videoTopicBean.setEname("30秒懂财经");
+            videoTopicBean.setTid("T1472544642251");
+            videoTopicBean.setTname("T1472544642251");
+            bean.setVideoTopic(videoTopicBean);
             list.add(bean);
         }
         return list;

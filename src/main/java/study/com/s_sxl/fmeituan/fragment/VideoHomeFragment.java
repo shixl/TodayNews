@@ -38,7 +38,7 @@ public class VideoHomeFragment extends BaseFragment<VideoListPresenter,VideosLis
     IRecyclerView mRecycler;
     private CommonRecycleViewAdapter<VideoData> mAdapter;
 
-    private String mVideoType ="VIDEO_TYPE";
+//    private String mVideoType;
     private int mStartPage=0;
 
     /**
@@ -121,7 +121,7 @@ public class VideoHomeFragment extends BaseFragment<VideoListPresenter,VideosLis
     private void initData() {
         if(mAdapter.getSize() <=0){
             mStartPage = 0;
-            mPresenter.getVideosListDataRequest(mVideoType,mStartPage);
+            mPresenter.getVideosListDataRequest(mStartPage);
         }
     }
 
@@ -136,7 +136,7 @@ public class VideoHomeFragment extends BaseFragment<VideoListPresenter,VideosLis
         mAdapter.getPageBean().setRefresh(true);
         mStartPage = 0;
         mRecycler.setRefreshing(true);
-        mPresenter.getVideosListDataRequest(mVideoType,mStartPage);
+        mPresenter.getVideosListDataRequest(mStartPage);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class VideoHomeFragment extends BaseFragment<VideoListPresenter,VideosLis
         mAdapter.getPageBean().setRefresh(false);
         //发起请求
         mRecycler.setLoadMoreStatus(LoadMoreFooterView.Status.LOADING);
-        mPresenter.getVideosListDataRequest(mVideoType, mStartPage);
+        mPresenter.getVideosListDataRequest(mStartPage);
     }
 
     @Override
@@ -178,8 +178,6 @@ public class VideoHomeFragment extends BaseFragment<VideoListPresenter,VideosLis
     @Override
     public void showErrorTip(String msg) {
         if( mAdapter.getPageBean().isRefresh()) {
-            /*loadedTip.setLoadingTip(LoadingTip.LoadStatus.error);
-            loadedTip.setTips(msg);*/
             mRecycler.setRefreshing(false);
         }else{
             mRecycler.setLoadMoreStatus(LoadMoreFooterView.Status.ERROR);
